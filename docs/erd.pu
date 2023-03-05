@@ -1,0 +1,90 @@
+@startuml Entities
+
+skinparam class {
+    FontColor          #222
+    AttributeFontColor #222
+    FontSize           17
+    AttributeFontSize  16
+    AttributeFontname  Helvetica
+    BackgroundColor    #87B7FC
+    BorderColor        #444
+    ArrowColor         #444
+}
+left to right direction
+
+skinparam componentStyle uml2
+
+entity users {
+	id
+    auth_id
+    first_name
+    last_name
+    created_at
+    updated_at
+}
+
+entity articles {
+	id
+    title
+    content
+    status
+    created_at
+    updated_at
+}
+
+entity user_has_articles {
+	id
+    user_id
+    article_id
+    created_at
+}
+
+users }|--o{ user_has_articles
+articles }|--|{ user_has_articles
+
+entity tags {
+	id
+    name
+    is_deleted
+    created_at
+}
+
+entity article_has_tags {
+	id
+    article_id
+    tag_id
+    created_at
+}
+
+tags }|--o{ article_has_tags
+articles }|--o{ article_has_tags
+
+entity comments {
+	id
+    user_id
+    article_id
+}
+
+users ||--o{ comments
+articles ||--o{ comments
+
+entity favarite_articles {
+	id
+    user_id
+    article_id
+    created_at
+}
+
+users ||--o{ favarite_articles
+articles ||--o{ favarite_articles
+
+entity article_photos {
+	id
+    article_id
+    stored
+    created_at
+}
+
+articles ||--o{ article_photos
+
+@enduml
